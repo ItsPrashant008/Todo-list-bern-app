@@ -16,15 +16,20 @@ export async function basicMethod() {
 
   return {
     currentTime,
-    
+
     deployer,
     users,
     todo,
   };
 }
 
-// conver value into Big Number 1^18 or 1e18
-function decimal(value: any) {
+// convert value into Big Number with decimal places like 1^18 or 1e18
+export function decimal(value: any) {
   const powValue = BigNumber.from("10").pow(18);
   return BigNumber.from(value).mul(powValue);
+}
+
+// convert value into Big Number 
+export function big(value: any) {
+  return BigNumber.from(value)
 }
