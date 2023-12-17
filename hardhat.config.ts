@@ -5,7 +5,7 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
-import "solidity-coverage"; 
+import "solidity-coverage";
 import "@nomiclabs/hardhat-solhint";
 
 require("hardhat-contract-sizer");
@@ -54,7 +54,7 @@ const config: HardhatUserConfig = {
 
 
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: process.env.POLYGONSCAN_API_KEY,
   },
 };
 
