@@ -10,12 +10,10 @@ async function main() {
 
   console.log("Todo-list Contract Address-> ", todo.address);
 
-
   await hre.run("verify:verify", {
     address: todo.address,
     contract: "contracts/Todo.sol:Todo",
   });
-
 }
 
 main()
@@ -25,5 +23,4 @@ main()
     process.exit(1);
   });
 
-
-// https://mumbai.polygonscan.com/address/0x6638ffc9D8AB158501916b954637e7a135E02Da3#code
+// https://mumbai.polygonscan.com/address/0xeB7a0237E9ee6f9B05471936329b136601B96553#code

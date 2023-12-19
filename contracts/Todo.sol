@@ -46,11 +46,17 @@ contract Todo is ITodo {
      * @param dateTime The date and time associated with the task.
      */
     function addTask(string memory name, uint dateTime) external {
+        // check task time is greater than current time
+        require(
+            dateTime > block.timestamp,
+            "Todo: Date Time is greater than current time!"
+        );
+
         // Increment the totalTask count to generate a new task ID.
         totalTask++;
 
         // Create a new Task struct with the incremented ID, task details, and the owner's address.
-        tasks[totalTask] = Task(totalTask, name, dateTime, msg.sender);
+        tasks[totalTask] = Task(totalTask, name, dateTime, msg.sender, false);
 
         // Add the new task ID to the userTasks mapping for the owner.
         userTasks[msg.sender].push(totalTask);
@@ -85,7 +91,8 @@ contract Todo is ITodo {
                     tasks[taskId].id,
                     tasks[taskId].name,
                     tasks[taskId].date,
-                    tasks[taskId].owner
+                    tasks[taskId].owner,
+                    tasks[taskId].completed
                 );
 
                 // Increment the counter to move to the next index in the result array.
@@ -129,7 +136,8 @@ contract Todo is ITodo {
                     tasks[i].id,
                     tasks[i].name,
                     tasks[i].date,
-                    tasks[i].owner
+                    tasks[i].owner,
+                    tasks[i].completed
                 );
 
                 // Increment the counter to move to the next index in the result array.
@@ -158,17 +166,19 @@ contract Todo is ITodo {
      * @param taskId The unique identifier of the task to be updated.
      * @param name The new name for the task.
      * @param dateTime The new date for the task.
+     * @param completed The task completed status(true for completed, false for not completed).
      */
     function updateTask(
         uint taskId,
         string memory name,
-        uint dateTime
+        uint dateTime,
+        bool completed
     ) external onlyOwner(taskId) {
         // Update the task details with the provided information.
-        tasks[taskId] = Task(taskId, name, dateTime, msg.sender);
+        tasks[taskId] = Task(taskId, name, dateTime, msg.sender, completed);
 
         // Emit an event to indicate the successful update of the task.
-        emit UpdateTask(taskId, name, dateTime, msg.sender);
+        emit UpdateTask(taskId, name, dateTime, msg.sender, completed);
     }
 
     /**
