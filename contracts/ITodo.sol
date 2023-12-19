@@ -13,6 +13,7 @@ interface ITodo {
         string name;
         uint date;
         address owner;
+        bool completed;
     }
 
     /**
@@ -35,12 +36,15 @@ interface ITodo {
      * @param taskNewName The new name of the updated task.
      * @param dateTime The new date of the updated task.
      * @param taskOwner The address of the owner of the updated task.
+     * @param completed The task completed status(true for completed, false for not completed).
+
      */
     event UpdateTask(
         uint indexed taskId,
         string taskNewName,
         uint dateTime,
-        address taskOwner
+        address taskOwner,
+        bool completed
     );
 
     /**
@@ -75,11 +79,13 @@ interface ITodo {
      * @param taskId The unique identifier of the task to be updated.
      * @param name The new name for the task.
      * @param dateTime The new date for the task.
+     * @param dateTime The new date for the task.
      */
     function updateTask(
         uint taskId,
         string memory name,
-        uint dateTime
+        uint dateTime,
+        bool completed
     ) external;
 
     /**
