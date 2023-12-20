@@ -1,4 +1,6 @@
-import { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Wallet } from "./components/Wallet";
@@ -9,24 +11,22 @@ import { ViewTasks } from "./components/ViewTasks";
 import { ViewAllTasks } from "./components/ViewAllTasks";
 import { ViewUserTasks } from "./components/ViewUserTasks";
 
-import "./App.css";
-
 function App() {
   const router = createBrowserRouter([
     // {path:"/", Element:<Wallet />}
     { path: "/", element: <Wallet /> },
-    { path: "/navBar", element: <NavBar /> },
-    { path: "/createTask", element: <CreateTask /> },
-    { path: "/updateTask", element: <UpdateTask /> },
-    { path: "/deleteTask", element: <DeleteTask /> },
-    { path: "/viewTasks", element: <ViewTasks /> },
-    { path: "/viewAllTasks", element: <ViewAllTasks /> },
-    { path: "/viewUserTasks", element: <ViewUserTasks /> },
+    { path: "/nav-bar", element: <NavBar /> },
+    { path: "/create-task", element: <CreateTask /> },
+    { path: "/update-task", element: <UpdateTask /> },
+    { path: "/delete-task", element: <DeleteTask /> },
+    { path: "/view-tasks", element: <ViewTasks /> },
+    { path: "/viewAll-tasks", element: <ViewAllTasks /> },
+    { path: "/viewUser-tasks", element: <ViewUserTasks /> },
   ]);
 
   return (
     <>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }
