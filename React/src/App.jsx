@@ -1,4 +1,6 @@
-import { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Wallet } from "./components/Wallet";
@@ -8,8 +10,6 @@ import { DeleteTask } from "./components/DeleteTask";
 import { ViewTasks } from "./components/ViewTasks";
 import { ViewAllTasks } from "./components/ViewAllTasks";
 import { ViewUserTasks } from "./components/ViewUserTasks";
-
-import "./App.css";
 
 function App() {
   const router = createBrowserRouter([
