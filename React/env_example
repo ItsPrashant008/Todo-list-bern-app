@@ -10,3 +10,4 @@ REACT_APP_ALCHEMY_POLYGON_SITE_URL=https://mumbai.polygonscan.com/
 
 REACT_APP_ALCHEMY_POLYGON_SYMBOL=MATIC
  
+BaseURL=http://localhost:8000

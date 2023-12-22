@@ -1,9 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
-
-// const cors = require("cors");
 
 const {
   contract,
@@ -13,7 +12,7 @@ const {
   viewUserTasks,
 } = require("./web3");
 
-// app.use(cors);
+app.use(cors());
 
 app.post("/create-task", async (req, res) => {
   await contract.methods
