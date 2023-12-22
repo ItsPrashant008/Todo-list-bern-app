@@ -33,12 +33,12 @@ export const WalletConnection = () => {
 
   const connectWallet = async () => {
     await setLocalStorage();
-    // swal("Success!", "Wallet Connected Successfully!", "success");
+    swal("Success!", "Wallet Connected Successfully!", "success");
   };
 
   const disconnectWallet = async () => {
     localStorage.removeItem("connectedAddress");
-    // swal("Success!", "Wallet Disconnected Sucessfully!", "success");
+    swal("Success!", "Wallet Disconnected Sucessfully!", "success");
   };
 
   const switchNetwork = async () => {
@@ -59,7 +59,7 @@ export const WalletConnection = () => {
             params: [
               {
                 chainId: Web3.utils.toHex(
-                  parseInt(process.env.REACT_APP_ChainId),
+                  parseInt(process.env.REACT_APP_ChainId)
                 ),
                 rpcUrls: [process.env.REACT_APP_ALCHEMY_POLYGON_API_KEY],
                 chainName: process.env.REACT_APP_ALCHEMY_POLYGON_NAME,
