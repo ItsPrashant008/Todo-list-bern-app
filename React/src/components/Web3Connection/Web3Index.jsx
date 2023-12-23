@@ -1,4 +1,5 @@
 import { Web3 } from "web3";
+import Abi from "./ABI.json";
 
 export const Web3Index = async () => {
   return new Promise(async (resolve, reject) => {
@@ -23,4 +24,14 @@ export const Web3Index = async () => {
       }
     }
   });
+};
+
+export const ContractInstance = async () => {
+  let contractAddress = process.env.Contract_Address;
+  let contractAbi = Abi;
+
+  const web3 = await Web3Index();
+
+  let instance = new web3.eth.Contract(contractAbi, contractAddress);
+  return instance;
 };

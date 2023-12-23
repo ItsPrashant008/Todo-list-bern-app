@@ -25,7 +25,7 @@ app.get("/totalTasks", async (req, res) => {
     let totalTask = await viewTotalTasks();
     res.status(200).json({
       status: true,
-      data: totalTask,
+      result: totalTask,
       message: "Data fetch Successfully!",
     });
   } catch (error) {
@@ -40,7 +40,7 @@ app.get("/viewTasks/:taskId", async (req, res) => {
     let tasks = await viewTasks(taskId);
     res
       .status(200)
-      .json({ status: true, data: tasks, message: "Data fetch Successfully!" });
+      .json({ status: true, result: tasks, message: "Data fetch Successfully!" });
   } catch (error) {
     res.status(500).json({ status: false, message: "Something went wrong!" });
     console.log("error--->>", error);
@@ -53,7 +53,7 @@ app.get("/viewAllTasks", async (req, res) => {
     if (allTasks.length > 0) {
       res.status(200).json({
         status: true,
-        data: allTasks,
+        result: allTasks,
         message: "Data fetch Successfully!",
       });
     } else {
@@ -72,7 +72,7 @@ app.get("/viewUserTasks/:address", async (req, res) => {
     if (userTasks.length > 0) {
       res.status(200).json({
         status: true,
-        data: userTasks,
+        result: userTasks,
         message: "Data fetch Successfully!",
       });
     } else {

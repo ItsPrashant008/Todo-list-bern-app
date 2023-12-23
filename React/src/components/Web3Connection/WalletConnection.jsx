@@ -78,7 +78,7 @@ export const WalletConnection = () => {
           // var modal = document.getElementById("myModal");
           // modal.style.display = "none";
         } catch (addError) {
-          swal("Error!", "Something went Wrong, Network not Added!", "error");
+          swal("Error!", "Something went wrong, Network not Added!", "error");
           console.error(addError);
         }
       }

@@ -2,14 +2,14 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/pages/NavBar";
 import { Wallet } from "./components/Wallet";
-import { CreateTask } from "./components/CreateTask";
-import { UpdateTask } from "./components/UpdateTask";
-import { DeleteTask } from "./components/DeleteTask";
-import { ViewTasks } from "./components/ViewTasks";
-import { ViewAllTasks } from "./components/ViewAllTasks";
-import { ViewUserTasks } from "./components/ViewUserTasks";
+import { CreateTask } from "./components/pages/CreateTask";
+import { UpdateTask } from "./components/pages/UpdateTask";
+import { DeleteTask } from "./components/pages/DeleteTask";
+import { ViewTasks } from "./components/pages/ViewTasks";
+import { ViewAllTasks } from "./components/pages/ViewAllTasks";
+import { ViewUserTasks } from "./components/pages/ViewUserTasks";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +25,12 @@ function App() {
 
   return (
     <>
+      {/* Transaction Loader */}
+      <div
+        className="mainLoader loader loader-default "
+        id="loaderVisibility"
+        data-text="Loading...  Wait for Transaction to Complete!"></div>
+
       <RouterProvider router={router} />
     </>
   );
