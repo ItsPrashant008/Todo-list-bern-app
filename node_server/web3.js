@@ -12,10 +12,11 @@ const viewTotalTasks = async () => {
 const viewTasks = async (taskId) => {
   const task = await contract.methods.tasks(taskId).call();
   const { id, name, date, owner, completed } = task;
+  let dateTime = Number(date)*1000;
   let tasks = {
     id: Number(id),
     name,
-    date: Number(date),
+    date: new Date(dateTime).toLocaleDateString("sv"),
     owner,
     completed,
   };
@@ -26,7 +27,9 @@ const viewAllTasks = async () => {
   const task = await contract.methods.viewAllTasks().call();
 
   let allTask = task.map(({ id, name, date, owner, completed }) => {
-    return { id: Number(id), name, date: Number(date), owner, completed };
+
+    let dateTime = Number(date)*1000;
+    return { id: Number(id), name, date: new Date(dateTime).toLocaleDateString("sv"), owner, completed };
   });
 
   return allTask;
@@ -36,7 +39,8 @@ const viewUserTasks = async (account) => {
   const task = await contract.methods.viewUserTasks(account).call();
 
   let userTask = task.map(({ id, name, date, owner, completed }) => {
-    return { id: Number(id), name, date: Number(date), owner, completed };
+    let dateTime = Number(date)*1000;
+    return { id: Number(id), name, date: new Date(dateTime).toLocaleDateString("sv"), owner, completed };
   });
 
   return userTask;

@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { ContractMethods } from "../Web3Connection/ContractMethods";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import swal from "sweetalert";
 
+import { NavBar } from "./NavBar";
+
 export const DeleteTask = () => {
+  const params = useParams();
+
   const navigateTo = useNavigate();
   useEffect(() => {
     let address = localStorage.getItem("connectedAddress");
-    if (address) {
-      //
-    } else {
+    if (!address) {
       swal(
         "Warning!",
         "Wallet not Connected, Connect Wallet First!",
         "warning"
       );
       navigateTo("/");
+    } else {
+      deleteTask(params.id);
     }
   }, []);
 
@@ -37,26 +41,15 @@ export const DeleteTask = () => {
     }
 
     document.getElementById("loaderVisibility").classList.remove("is-active");
+
+    navigateTo("/viewAll-tasks");
   };
+
   return (
     <>
+      <NavBar />
+      <br /> <br />
       <button onClick={deleteTask}> Delete Task </button>
-      <br /> <br />
-      <Link to="/">Home</Link>
-      <br /> <br />
-      <Link to="/nav-bar">nav-bar</Link>
-      <br /> <br />
-      <Link to="/create-task">create-task</Link>
-      <br /> <br />
-      <Link to="/update-task">update-task</Link>
-      <br /> <br />
-      <Link to="/delete-task">delete-task</Link>
-      <br /> <br />
-      <Link to="/view-tasks">view-tasks</Link>
-      <br /> <br />
-      <Link to="/viewAll-tasks">viewAll-tasks</Link>
-      <br /> <br />
-      <Link to="/viewUser-tasks">viewUser-tasks</Link>
       <br /> <br />
       <h1>Delete Task Component</h1>
     </>

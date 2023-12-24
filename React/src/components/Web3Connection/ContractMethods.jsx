@@ -24,9 +24,10 @@ export const ContractMethods = async () => {
 
   const updateTask = async (taskId, name, dateTime, completed) => {
     let result = await nodeapi.viewTasks(taskId);
+    let updateTask;
 
     if (result.owner.toLowerCase() == walletAddress.toLowerCase()) {
-      let updateTask = await contract.methods
+      updateTask = await contract.methods
         .updateTask(taskId, name, dateTime, completed)
         .send({ from: walletAddress })
         .then(() => {
@@ -45,9 +46,9 @@ export const ContractMethods = async () => {
 
   const deleteTask = async (taskId) => {
     let result = await nodeapi.viewTasks(taskId);
-
+    let deleteTask;
     if (result.owner.toLowerCase() == walletAddress.toLowerCase()) {
-      let deleteTask = await contract.methods
+      deleteTask = await contract.methods
         .deleteTask(taskId)
         .send({ from: walletAddress })
         .then(() => {
