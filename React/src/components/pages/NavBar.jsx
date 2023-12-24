@@ -2,43 +2,48 @@ import React, { useState, useEffect } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import swal from "sweetalert";
-
 export const NavBar = () => {
-  const navigateTo = useNavigate();
-  useEffect(() => {
-    let address = localStorage.getItem("connectedAddress");
-    if (address) {
-      //
-    } else {
-      swal(
-        "Warning!",
-        "Wallet not Connected, Connect Wallet First!",
-        "warning"
-      );
-      navigateTo("/");
-    }
-  }, []);
-
   return (
     <>
-      <Link to="/">Home</Link>
-      <br /> <br />
-      <Link to="/nav-bar">nav-bar</Link>
-      <br /> <br />
-      <Link to="/create-task">create-task</Link>
-      <br /> <br />
-      <Link to="/update-task">update-task</Link>
-      <br /> <br />
-      <Link to="/delete-task">delete-task</Link>
-      <br /> <br />
-      <Link to="/view-tasks">view-tasks</Link>
-      <br /> <br />
-      <Link to="/viewAll-tasks">viewAll-tasks</Link>
-      <br /> <br />
-      <Link to="/viewUser-tasks">viewUser-tasks</Link>
-      <br /> <br />
-      <h1>Nav Bar Component</h1>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Link className="navbar-brand" to="/">
+          Home
+        </Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/create-task">
+                Create Task
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/update-task/1">
+                Update Task
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/delete-task/1">
+                Delete Task
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/view-tasks">
+                View Task
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/viewAll-tasks">
+                View All Tasks
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/viewUser-tasks">
+                View User Tasks
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </>
   );
 };

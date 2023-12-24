@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
-
 import swal from "sweetalert";
 
+import { useEffect, useState } from "react";
+
+import { NodeApi } from "../apis/NodeApi";
+import { NavBar } from "./NavBar";
+import { useNavigate, useParams } from "react-router-dom";
 import { ContractMethods } from "../Web3Connection/ContractMethods";
 
 export const UpdateTask = () => {
+  const params = useParams();
+
+  const [task, setTask] = useState([]);
   const navigateTo = useNavigate();
-
-  let address;
-
   useEffect(() => {
-    address = localStorage.getItem("connectedAddress");
+    let address = localStorage.getItem("connectedAddress");
     if (!address) {
       swal(
         "Warning!",
@@ -21,52 +22,93 @@ export const UpdateTask = () => {
       );
       navigateTo("/");
     } else {
+      viewTask(params.id);
     }
   }, []);
 
-  const updateTask = async () => {
-    document.getElementById("loaderVisibility").classList.add("is-active");
+  const viewTask = async (id) => {
     try {
-      const instance = await ContractMethods();
-      const { status, message } = await instance.updateTask(
-        1,
-        "name",
-        1734957571,
-        true
-      );
+      const nodeapi = NodeApi();
 
-      if (status) {
-        swal("Sucess!", message, "success");
-      } else {
-        swal("Error!", message, "error");
-      }
+      let result = await nodeapi.viewTasks(id);
+      console.log("result", result);
+
+      setTask(result);
     } catch {
-      swal("Error!", "Something went wrong in Update Task!", "error");
+      console.log("error in view task");
     }
-    document.getElementById("loaderVisibility").classList.remove("is-active");
+  };
+
+  const updateTask = async (event) => {
+    // document.getElementById("loaderVisibility").classList.add("is-active");
+
+    // try {
+    event.preventDefault();
+    let name = document.querySelector("#name").value;
+    let date = document.querySelector("#date").value;
+    let completed = document.querySelector("#completedStatus").value === "true";
+
+    var someDate = new Date(date);
+    someDate = someDate.getTime() / 1000;
+
+    const instance = await ContractMethods();
+    const { status, message } = await instance.updateTask(
+      params.id,
+      name,
+      someDate,
+      completed
+    );
+
+    if (status) {
+      swal("Sucess!", message, "success");
+    } else {
+      swal("Error!", message, "error");
+    }
+    // } catch (error) {
+    //   console.log("Error in update Task", error);
+    //   swal("Error!", "Something went wrong in Update Task!", "error");
+    // }
+
+    // document.getElementById("loaderVisibility").classList.remove("is-active");
   };
 
   return (
     <>
-      <button onClick={updateTask}> Update Task </button>
-      <br /> <br />
-      <Link to="/">Home</Link>
-      <br /> <br />
-      <Link to="/nav-bar">nav-bar</Link>
-      <br /> <br />
-      <Link to="/create-task">create-task</Link>
-      <br /> <br />
-      <Link to="/update-task">update-task</Link>
-      <br /> <br />
-      <Link to="/delete-task">delete-task</Link>
-      <br /> <br />
-      <Link to="/view-tasks">view-tasks</Link>
-      <br /> <br />
-      <Link to="/viewAll-tasks">viewAll-tasks</Link>
-      <br /> <br />
-      <Link to="/viewUser-tasks">viewUser-tasks</Link>
-      <br /> <br />
-      <h1>Update Task Component</h1>
+      <NavBar />
+      <h3>Update Tasks Component</h3>
+      <form onSubmit={updateTask}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={task.name || ""}
+          onChange={(e) => setTask({ name: e.target.value, date: task.date })}
+          placeholder="Enter Task Name"
+        />
+        <br />
+        <br />
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={task.date ? task.date : ""}
+          onChange={(e) => setTask({ name: task.name, date: e.target.value })}
+          placeholder="Enter Task Date"
+        />
+        <br />
+        <br />
+
+        <select
+          id="completedStatus"
+          defaultValue={task.completed ? "true" : "false"}>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+        <br />
+        <br />
+
+        <input type="submit" value="Update Task" />
+      </form>
     </>
   );
 };

@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ContractMethods } from "../Web3Connection/ContractMethods";
 import swal from "sweetalert";
 
+import { NavBar } from "./NavBar";
+
 export const CreateTask = () => {
   const navigateTo = useNavigate();
 
@@ -17,12 +19,18 @@ export const CreateTask = () => {
     }
   }, []);
 
-  const createTask = async () => {
+  const createTask = async (event) => {
     document.getElementById("loaderVisibility").classList.add("is-active");
 
     try {
+      event.preventDefault();
+      let name = document.querySelector("#name").value;
+      let date = document.querySelector("#date").value;
+
+      var someDate = new Date(date);
+      someDate = someDate.getTime() / 1000;
       const instance = await ContractMethods();
-      const { status, message } = await instance.createTask("name", 1734957571);
+      const { status, message } = await instance.createTask(name, someDate);
 
       if (status) {
         swal("Sucess!", message, "success");
@@ -38,22 +46,26 @@ export const CreateTask = () => {
 
   return (
     <>
-      <h1>Create Task Component</h1>
-      <button onClick={createTask}> Creating Task </button>
+      <NavBar />
       <br /> <br />
-      <Link to="/">Home</Link>
-      <br /> <br />
-      <Link to="/create-task">create-task</Link>
-      <br /> <br />
-      <Link to="/update-task">update-task</Link>
-      <br /> <br />
-      <Link to="/delete-task">delete-task</Link>
-      <br /> <br />
-      <Link to="/view-tasks">view-tasks</Link>
-      <br /> <br />
-      <Link to="/viewAll-tasks">viewAll-tasks</Link>
-      <br /> <br />
-      <Link to="/viewUser-tasks">viewUser-tasks</Link>
+      <h3>Create Task Component</h3>
+      <form onSubmit={createTask}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter Task Name"
+        />
+        <br />
+        <input
+          type="date"
+          id="date"
+          name="date"
+          placeholder="Enter Task Date"
+        />
+        <br />
+        <input type="submit" value="Add Task" />
+      </form>
     </>
   );
 };

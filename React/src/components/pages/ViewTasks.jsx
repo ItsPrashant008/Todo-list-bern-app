@@ -2,17 +2,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 import swal from "sweetalert";
 
-import axios from "axios";
-
 import { useEffect, useState } from "react";
 
+import { NodeApi } from "../apis/NodeApi";
+import { NavBar } from "./NavBar";
+
 export const ViewTasks = () => {
+  const [task, setTask] = useState([[]]);
   const navigateTo = useNavigate();
   useEffect(() => {
     let address = localStorage.getItem("connectedAddress");
-    if (address) {
-      //
-    } else {
+    if (!address) {
       swal(
         "Warning!",
         "Wallet not Connected, Connect Wallet First!",
@@ -22,31 +22,34 @@ export const ViewTasks = () => {
     }
   }, []);
 
-  const getDetail = async (id) => {
-    axios.get(`${process.env.BaseURL}/viewTasks/${id}`).then((response) => {
-      console.log("response.data--->>> ", response.data);
-    });
+  const viewTask = async (event) => {
+    try {
+      event.preventDefault();
+      let taskId = document.querySelector("#taskId").value;
+      const nodeapi = NodeApi();
+
+      let result = await nodeapi.viewTasks(taskId);
+      console.log("result", result);
+
+      setTask(result);
+    } catch {
+      console.log("error in view task");
+    }
   };
 
   return (
     <>
-      <Link to="/">Home</Link>
-      <br /> <br />
-      <Link to="/nav-bar">nav-bar</Link>
-      <br /> <br />
-      <Link to="/create-task">create-task</Link>
-      <br /> <br />
-      <Link to="/update-task">update-task</Link>
-      <br /> <br />
-      <Link to="/delete-task">delete-task</Link>
-      <br /> <br />
-      <Link to="/view-tasks">view-tasks</Link>
-      <br /> <br />
-      <Link to="/viewAll-tasks">viewAll-tasks</Link>
-      <br /> <br />
-      <Link to="/viewUser-tasks">viewUser-tasks</Link>
-      <br /> <br />
+      <NavBar />
       <h1>View Tasks Component</h1>
+      <form onSubmit={viewTask}>
+        <input
+          type="number"
+          id="taskId"
+          name="taskId"
+          placeholder="Enter Task Id"
+        />
+        <input type="submit" value="Get Task" />
+      </form>
     </>
   );
 };
