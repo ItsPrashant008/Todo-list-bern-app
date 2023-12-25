@@ -1,4 +1,4 @@
-PORT=
+PORT=8000
 # // I have to use alchemy key you can use quick node api key in place of alchemy
 Alchemy_Api_Key=
-ContractAddress=
+ContractAddress=0xeB7a0237E9ee6f9B05471936329b136601B96553

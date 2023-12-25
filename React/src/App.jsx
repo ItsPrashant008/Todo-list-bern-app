@@ -1,10 +1,11 @@
 import "./App.css";
+import "./assets/navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { NavBar } from "./components/pages/NavBar";
 import { PageNotFound } from "./components/PageNotFound";
 import { Wallet } from "./components/Wallet";
+import { NavBar } from "./components/pages/NavBar";
 import { CreateTask } from "./components/pages/CreateTask";
 import { UpdateTask } from "./components/pages/UpdateTask";
 import { DeleteTask } from "./components/pages/DeleteTask";
@@ -16,7 +17,7 @@ function App() {
   const router = createBrowserRouter([
     { path: "*", element: <PageNotFound /> },
     { path: "/", element: <Wallet /> },
-    { path: "/nav-bar", element: <NavBar /> },
+    { path: "/NavBar", element: <NavBar /> },
     { path: "/create-task", element: <CreateTask /> },
     { path: "/update-task/:id", element: <UpdateTask /> },
     { path: "/delete-task/:id", element: <DeleteTask /> },
@@ -29,9 +30,9 @@ function App() {
     <>
       {/* Transaction Loader */}
       <div
-        className="mainLoader loader loader-default "
-        id="loaderVisibility"
-        data-text="Loading...  Wait for Transaction to Complete!"></div>
+        className='mainLoader loader loader-default '
+        id='loaderVisibility'
+        data-text='Loading...  Wait for Transaction to Complete!'></div>
 
       <RouterProvider router={router} />
     </>

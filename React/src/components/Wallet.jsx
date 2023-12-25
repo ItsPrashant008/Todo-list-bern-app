@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
-import swal from "sweetalert";
-
 import { WalletConnection } from "./Web3Connection/WalletConnection";
-
 import { NavBar } from "./pages/NavBar";
 
 export const Wallet = () => {
   const connection = WalletConnection();
+  const navigateTo = useNavigate();
 
   const [walletAddress, setWalletAddress] = useState(null);
 
   useEffect(() => {
     let address = localStorage.getItem("connectedAddress");
-    if (address) setWalletAddress(address);
+    if (address) {
+      setWalletAddress(address);
+    } else {
+      setWalletAddress(null);
+    }
   }, [connection]);
 
   window.addEventListener("load", async () => {
@@ -34,6 +34,8 @@ export const Wallet = () => {
     await connection.connectWallet();
     let address = localStorage.getItem("connectedAddress");
     setWalletAddress(address);
+
+    navigateTo("/viewAll-tasks");
   };
 
   const disconnectWallet = async () => {
@@ -44,7 +46,6 @@ export const Wallet = () => {
   return (
     <>
       <NavBar />
-      <br /> <br />
       {/* Modal Code */}
       <div id="myModal" className="modal ">
         <div className="modal-content my-4">
@@ -58,7 +59,7 @@ export const Wallet = () => {
             Looks like your current network selection is not supported. Please{" "}
             <span className="fw-semibold">
               <Link onClick={switchNetwork}>
-                Switch to the Polygon blockchain network
+                Switch to the Polygon blockchain network{" "}
               </Link>
               in your wallet to continue,
             </span>
@@ -66,10 +67,10 @@ export const Wallet = () => {
           </p>
         </div>
       </div>
-      <h1>Wallet Component </h1>
+      <h1>Connect your Wallet</h1>
       {walletAddress ? (
         <>
-          <h6>{walletAddress}</h6>
+          <h6 className="text-white">{walletAddress}</h6>
           <button className="btn btn-danger" onClick={disconnectWallet}>
             Disconnect Wallet
           </button>

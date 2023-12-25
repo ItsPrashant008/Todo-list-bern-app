@@ -29,13 +29,25 @@ export const CreateTask = () => {
 
       var someDate = new Date(date);
       someDate = someDate.getTime() / 1000;
-      const instance = await ContractMethods();
-      const { status, message } = await instance.createTask(name, someDate);
+      let currentDate = new Date().getTime() / 1000;
 
-      if (status) {
-        swal("Sucess!", message, "success");
+      if (someDate >= currentDate) {
+        const instance = await ContractMethods();
+        const { status, message } = await instance.createTask(name, someDate);
+
+        if (status) {
+          swal("Sucess!", message, "success");
+        } else {
+          swal("Error!", message, "error");
+        }
       } else {
-        swal("Error!", message, "error");
+        swal("Error!", "Task Time is Greater than Current Time!", "error");
+
+        document
+          .getElementById("loaderVisibility")
+          .classList.remove("is-active");
+
+        return false;
       }
     } catch {
       swal("Error!", "Something went wrong in Create Task!", "error");
@@ -47,24 +59,49 @@ export const CreateTask = () => {
   return (
     <>
       <NavBar />
-      <br /> <br />
-      <h3>Create Task Component</h3>
-      <form onSubmit={createTask}>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Enter Task Name"
-        />
-        <br />
-        <input
-          type="date"
-          id="date"
-          name="date"
-          placeholder="Enter Task Date"
-        />
-        <br />
-        <input type="submit" value="Add Task" />
+
+      <h3>Create Task</h3>
+
+      <form className=" gradient-custom" onSubmit={createTask}>
+        <div className="container">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-12 col-md-8 col-lg-6 col-xl-4">
+              <div className=" text-white">
+                <div className=" text-center">
+                  <div className="mb-md-5">
+                    <div className="form-outline form-white mb-4">
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter Task Name"
+                        required
+                      />
+                    </div>
+
+                    <div className="form-outline form-white mb-4">
+                      <input
+                        className="form-control"
+                        type="date"
+                        id="date"
+                        name="date"
+                        placeholder="Enter Task Date"
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-md-5  ">
+                      <button type="submit" className="btn btn-primary">
+                        Add Task
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </>
   );
