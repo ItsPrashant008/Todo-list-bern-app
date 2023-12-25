@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { NavBar } from "./pages/NavBar";
 
 export const PageNotFound = () => {
   return (
     <>
+      <NavBar />
       <div className="page-not-found">
         <p className="error">404</p>
         <p className="op">Opps..!!! Page not Found</p>

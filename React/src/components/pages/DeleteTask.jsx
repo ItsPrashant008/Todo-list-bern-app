@@ -16,7 +16,7 @@ export const DeleteTask = () => {
       swal(
         "Warning!",
         "Wallet not Connected, Connect Wallet First!",
-        "warning"
+        "warning",
       );
       navigateTo("/");
     } else {
@@ -29,7 +29,7 @@ export const DeleteTask = () => {
 
     try {
       const instance = await ContractMethods();
-      const { status, message } = await instance.deleteTask(1);
+      const { status, message } = await instance.deleteTask(params.id);
 
       if (status) {
         swal("Sucess!", message, "success");
