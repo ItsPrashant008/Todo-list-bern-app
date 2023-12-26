@@ -21,9 +21,9 @@ If you are setting up by cloning, please remove the "@nomicfoundation/hardhat-to
 
 These packages will help you in both small and large projects. They will assist you in testing, generating code coverage, determining contract size, and calculating contract gas fees/prices in USD.
 
-<h1> If you want to set up the app from scratch, follow these steps: </h1>
+# If you want to set up the app from scratch, follow these steps: 
 
-# Install Packages with Latest Version of Hardhat and Openzeppelin
+## Install Packages with Latest Version of Hardhat and Openzeppelin
 
 <b> Create Package.json file </b>
 
