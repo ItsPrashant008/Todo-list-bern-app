@@ -1,3 +1,20 @@
+<h1>Todo List Dapp</h1>
+
+I have created a basic Todo list decentralized application (dApp) using Solidity, Node.js, and React. In this application, users can Create, Update, Delete, and View their tasks.
+
+Solidity: I used Solidity to create the smart contract for the Todo list, and with the help of Hardhat, I deployed and verified the smart contract on the Polygon test network.
+
+Node.js: I utilized Node.js to fetch data from the blockchain, enabling to check the data from the read methods of the smart contract. I also created an API to use this data in React. However,
+\*I used Nodejs to fetch data but You can directly fetch data from the React application without using Node.js.
+
+React: I employed React.js to manage the frontend of the application. It facilitates the interaction with our smart contract, allowing users to perform write operations without revealing their private keys.
+
+<b>And along with that, I have managed the Connect Wallet functionality very well. You can either use my Connect Wallet functionality or add multiple wallets, such as WalletConnect and MetaMask.</b>
+
+---
+
+# Hardhat Setup
+
 If you are setting up by cloning, please remove the "@nomicfoundation/hardhat-toolbox" and "@typechain/hardhat" packages from the package.json because they might not install correctly due to different package versions. After removing them, make sure to add "--force install" at the end to forcefully install all the packages.
 
 ---
@@ -28,78 +45,50 @@ These packages will help you in both small and large projects. They will assist 
 
 # For Hardhat Setps
 
-    npx hardhat
+I uploading the Hardhat setup code to my GitHub repository, where you can easily set up Hardhat. If you want, you can directly go there by clicking on this link ![Click Here](https://github.com/prashantyadav008/Hardhat-Setup).
 
-<b> Choose script, I choose Typescript </b>
-<b> Add .git ignore </b>
-<b> No need to install hardhat-toolbox, we already install </b>
+I have placed the template example of the env file in advance. You can run this command directly to create the env file, and then fill in the required parameters. I have also included/mentioned where you can get the values for these parameters in the Hardhat setup code.
 
-<h2> you can remove the existing contracts, testing files, and scripts from the project and replace them with your own contracts, tests, and scripts. </h2>
-
-<b> Make sure to update your Hardhat configuration and create a .env file, You can refer to the example .env file provided and make the necessary updates to your own .env file and the Hardhat configuration file based on your network specifications.</b>
-
-<p> ETHERSCAN_API_KEY </p>: <span> You will get the ETHERSCAN API KEY from etherscan.io, for which you need to log in to etherscan.io. After logging in, go to the "https://etherscan.io/myapikey" website and create your API key there. </span>
-<p> ALCHEMY_GOERLI_API_KEY </p>: <span> You can get the ALCHEMY GOERLI API KEY either from Alchemy or create it from Infura. You have the option to create an API key from Alchemy based on your network preferences by visiting https://dashboard.alchemy.com/. Moreover, you can also use Alchemy's "faucet" feature to get test Ether for your Goerli network or other network. </span>
-<p> PRIVATE_KEY </p>: <span> You can obtain your private key from your public address in MetaMask. </span>
-
-# Then, Test your Smart contract
-
-    npx hardhat clean
-
-    npx hardhat compile
-
-    npx hardhat test
-
-    npx hardhat coverage
-
-<b> After Successfully run test case you can use this setup as per you code/contract <b>
+    cp env_example .env
 
 ---
 
-<h1> Ethereum Network <h1>
-<h2> Add Network Network in MetaMask <h2>
+# For React Setps
 
-# -------- Testnet Network --------
+Go to React Folder
 
-    Metamask Network Parameters
-    Network Name: Goerli test network
-    New RPC URL: https://goerli.infura.io/v3/
-    Chain ID: 5
-    Currency Symbol: GoerliETH
-    Block Explorer URL: https://goerli.etherscan.io
+    cd React
 
-# Deploy:
+Install Dependency Packages
 
-    npx hardhat run --network goerli scripts/deploy.ts
+    npm i --save
 
-# Verify:
+ENV file: In the env file, I have currently used my contract address. You can change it to your smart contract address. Additionally, you will need to pass the URL of any Ethereum provider like Alchemy, Infura, or QuickNode. I have currently used the HTTP URL of your Alchemy key for the Polygon testnet.
 
-     npx hardhat verify --network goerli <token.address>
+    cp env_example .env
 
----
+Start React Server
 
-Polygon Network
+    npm start
 
-# -------- Testnet Network --------
+# For Node Setps
 
-    Metamask Network Parameters
+node_server
 
-    Network Name: Mumbai Testnet
-    New RPC URL: https://polygon-mumbai.g.alchemy.com/v2/<apikey>
-    Chain ID: 80001
-    Currency Symbol: MATIC
-    Block Explorer URL: https://mumbai.polygonscan.com/
+Go to Node Folder
 
-Deploy: npx hardhat run --network polygon_mumbai scripts/deploy.ts
-Verify: npx hardhat verify --network polygon_mumbai <token.address>
+    cd node_server
 
-# -------- Mainnet Network --------
+Install Dependency Packages
 
-    Network Name: Polygon Mainnet
-    New RPC URL: https://polygon-rpc.com/
-    Chain ID: 137
-    Currency Symbol: MATIC
-    Block Explorer URL: https://polygonscan.com/
+    npm i --save
 
-Deploy: npx hardhat run --network matic scripts/deploy.ts
-Verify: npx hardhat verify --network matic <token.address>
+ENV file: In the env file, I have currently used my contract address. You can change it to your smart contract address. Additionally, you will need to pass the URL of any Ethereum provider like Alchemy, Infura, or QuickNode. I have currently used the HTTP URL of your Alchemy key for the Polygon testnet.
+
+    cp env_example .env
+
+Start Node Server
+
+    npm start
+
+Contract ABI: I have currently used the ABI of my contract address. When you use your contract address, make sure to replace the ABI in the abi.json file with the ABI of your contract address.
