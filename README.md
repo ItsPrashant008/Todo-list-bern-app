@@ -45,7 +45,7 @@ These packages will help you in both small and large projects. They will assist 
 
 # For Hardhat Setps
 
-I uploading the Hardhat setup code to my GitHub repository, where you can easily set up Hardhat. If you want, you can directly go there by clicking on this link ![Click Here](https://github.com/prashantyadav008/Hardhat-Setup).
+I uploading the Hardhat setup code to my GitHub repository, where you can easily set up Hardhat. If you want, you can directly go there by clicking on this link [Click Here](https://github.com/prashantyadav008/Hardhat-Setup).
 
 I have placed the template example of the env file in advance. You can run this command directly to create the env file, and then fill in the required parameters. I have also included/mentioned where you can get the values for these parameters in the Hardhat setup code.
 
